@@ -37,15 +37,31 @@ def main():
         url = st.sidebar.text_input("URL:")
         if st.sidebar.button("Summarize"):
             if url:
+
+                #original news
                 st.subheader("Original News Article:")
                 article = Article(url)
                 article.download()
                 article.parse()
                 st.write(article.text)
 
+                #summary
                 st.subheader("Summary:")
                 summary = summarize_from_url(url)
                 st.write(summary)
+
+                # title
+                st.subheader("News Title:")
+                st.write(article.title)
+
+                # top img
+                st.subheader("Top Image:")
+                st.image(article.top_image)
+
+                #postdate
+                st.subheader("News Posted On:")
+                st.write(article.publish_date)
+
             else:
                 st.warning("Please enter a valid URL.")
 
